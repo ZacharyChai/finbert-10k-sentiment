@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Raw 10-K HTML is large and re-fetchable from EDGAR; the derived artefacts
+# (extracted sections, sentiment cache, panels) are what the analysis needs and
+# are committed so a reviewer can re-run analysis.py without EDGAR or a GPU.
+data/raw/filings/
+data/raw/prices/
+data/raw/company_tickers.json
+data/raw/submissions_*.json
+data/processed/*.log
+
+# HuggingFace model cache
+.cache/

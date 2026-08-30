@@ -1,0 +1,23 @@
+# Pinned for reproducibility. Notable constraints:
+#   torch 2.2.2      -- last release with x86-64 macOS wheels
+#   numpy < 2        -- required by torch 2.2.2
+#   transformers 4.36 -- newer versions refuse to load .bin checkpoints on
+#                        torch < 2.6, and ProsusAI/finbert ships no safetensors
+torch==2.2.2
+transformers==4.36.2
+tokenizers==0.15.2
+huggingface-hub==0.25.2
+safetensors==0.7.0
+
+numpy==1.26.4
+pandas>=2.2,<3
+scipy==1.12.0
+statsmodels>=0.14
+matplotlib>=3.8
+
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+pysentiment2==0.1.1
+
+pytest>=8.0
