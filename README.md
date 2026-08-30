@@ -93,7 +93,10 @@ make all                               # build_dataset.py (from cache) then anal
 ```
 
 - `make analysis` — regressions, sorts, figures, `output/*.csv` (uses the
-  committed sentiment cache; seconds).
+  committed sentiment cache; seconds). This path plus the non-slow tests only
+  need the lightweight deps — `pandas numpy scipy statsmodels matplotlib
+  pysentiment2 lxml` — because `requests`, `beautifulsoup4`, `torch`, and
+  `transformers` are lazy-imported and used only when re-fetching or re-scoring.
 - `make data` — rebuild `filings.csv` from the cache; add `--refetch`
   (`python run_all.py --refetch`) to re-pull 10-Ks and re-run FinBERT from
   scratch (~1.5 h on CPU, downloads a ~440 MB model).

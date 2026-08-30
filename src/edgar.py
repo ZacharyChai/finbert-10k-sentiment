@@ -17,11 +17,10 @@ import json
 import os
 import re
 import time
+from functools import lru_cache
 from pathlib import Path
 
 import pandas as pd
-import requests
-from bs4 import BeautifulSoup
 
 from config import (
     DEFAULT_USER_AGENT,
@@ -38,12 +37,20 @@ FILINGS = RAW / "filings"
 FILINGS.mkdir(parents=True, exist_ok=True)
 
 UA = os.environ.get("SEC_USER_AGENT", DEFAULT_USER_AGENT)
-_SESSION = requests.Session()
-_SESSION.headers.update({"User-Agent": UA, "Accept-Encoding": "gzip, deflate"})
 
 
-def _get(url: str, **kw) -> requests.Response:
-    r = _SESSION.get(url, timeout=30, **kw)
+@lru_cache(maxsize=1)
+def _session():
+    # lazy so that analysis.py / tests can import this module without `requests`
+    import requests
+
+    s = requests.Session()
+    s.headers.update({"User-Agent": UA, "Accept-Encoding": "gzip, deflate"})
+    return s
+
+
+def _get(url: str, **kw):
+    r = _session().get(url, timeout=30, **kw)
     r.raise_for_status()
     time.sleep(EDGAR_REQUEST_PAUSE)
     return r
@@ -178,6 +185,8 @@ def html_to_text(html: str) -> str:
             el.tail = (el.tail or "") + "\n"
         text = root.text_content()
     except Exception:
+        from bs4 import BeautifulSoup
+
         text = BeautifulSoup(html, "lxml").get_text("\n")
 
     # normalise whitespace -- runs on every path
