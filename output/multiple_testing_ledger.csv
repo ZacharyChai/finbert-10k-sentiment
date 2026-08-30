@@ -1,0 +1,2 @@
+n_predictive_tests,n_significant_p05,expected_false_positives_at_5pct,bonferroni_alpha,n_significant_after_bonferroni
+25,0,1.2,0.002,0
