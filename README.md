@@ -136,12 +136,3 @@ data/processed/       committed: sentiment_cache/, prices.csv, filings.csv
 - Sentiment is scored on a 120-sentence sample per filing, not the whole section.
 - Survivorship: the universe is firms that were large-cap and filing 10-Ks for
   the whole window.
-
----
-
-*Résumé line:* Built a financial-NLP pipeline that scores 10-K risk-factor tone
-with FinBERT and the Loughran–McDonald dictionary across 376 filings, and tested
-it against forward abnormal returns and realised volatility with firm/year fixed
-effects, a within-year portfolio sort, and a past-return placebo — finding a
-clean null on returns and showing the transformer adds nothing over the word
-list for this task.
