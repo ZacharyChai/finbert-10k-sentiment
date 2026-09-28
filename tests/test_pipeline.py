@@ -164,7 +164,7 @@ def test_add_yoy_changes_only_differences_consecutive_fiscal_years():
 
 
 # --------------------------------------------------------------------------- #
-# FinBERT — slow, opt-in (needs the ~440MB model)
+# FinBERT: slow, opt-in (needs the ~440MB model)
 # --------------------------------------------------------------------------- #
 @pytest.mark.slow
 def test_finbert_orders_sentiment_as_expected():
